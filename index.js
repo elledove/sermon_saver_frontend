@@ -35,6 +35,17 @@ function getNotes() {
 
 function formHandler(e) {
     e.preventDefault()
-    console.log(e);
+    const inputTitle = document.querySelector('#input-title').value
+    const inputDescription = document.querySelector('#input-description').value
+    const inputSpeaker = document.querySelector('#input-speaker').value
+    const inputUrl = document.querySelector('#input-url').value
+    const inputTopic = parseInt( document.querySelector('#topics').value)
+    postFetchReq(inputTitle,inputDescription,inputSpeaker,inputUrl,inputTopic);
+}
+
+
+
+function postFetchReq(title,description,speaker,link_url,topic_id) {
+console.log(title,description,speaker,link_url,topic_id)
 
 }
