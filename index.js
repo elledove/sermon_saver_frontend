@@ -47,5 +47,21 @@ function formHandler(e) {
 
 function postFetchReq(title,description,speaker,link_url,topic_id) {
 console.log(title,description,speaker,link_url,topic_id)
+fetch(notesurl, {
+method: 'POST',
+headers:{"Content-Type": "application/json"},
+body: JSON.stringify({
+title: title,
+description: description,
+speaker: speaker,
+link_url: link_url,
+topic_id: topic_id
+
+ })
+})
+.then(response => response.json())
+.then(notes => {
+    console.log(notes);
+})
 
 }
