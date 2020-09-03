@@ -3,6 +3,9 @@ const topicsurl = "http://localhost:3000/api/topics"
 
 document.addEventListener('DOMContentLoaded', () => {
     getNotes();
+
+    const notesForm = document.querySelector('#create-note-form')
+    notesForm.addEventListener('submit',(e) => formHandler(e))
 })
 
 
@@ -18,7 +21,7 @@ function getNotes() {
             <h2>${note.attributes.title} </h2>
             <h3>${note.attributes.speaker} </h3>
             <p>  ${note.attributes.description}</p>
-            <a href="${note.attributes.link_ur}"> </a>
+            <a href="${note.attributes.link_url}"> Link to sermon/message </a>
             <h4> ${note.attributes.topic.name} </h4>
             <button ${note.id}>edit </button>
             </div>
@@ -27,5 +30,11 @@ function getNotes() {
             document.querySelector('#notes-container').innerHTML += notesInfo;
         });
     })
+
+}
+
+function formHandler(e) {
+    e.preventDefault()
+    console.log(e);
 
 }
