@@ -17,6 +17,8 @@ function getNotes() {
     .then(notes =>{
         console.log(notes)
         notes.data.forEach(note => {
+            //debugger
+            let newNote = new Note(note)
             // const notesInfo = `<div id="${note.id}">            
             // <h2>${note.attributes.title} </h2>
             // <h3>${note.attributes.speaker} </h3>
@@ -37,13 +39,13 @@ function getNotes() {
 
 
 function render(note){
-    const notesInfo = `<div id="${note.id}">            
+    const notesInfo = `<div data-id="${note.id}">            
     <h2>${note.attributes.title} </h2>
     <h3>${note.attributes.speaker} </h3>
     <p>  ${note.attributes.description}</p>
     <a href="${note.attributes.link_url}"> Link to sermon/message </a>
     <h4> ${note.attributes.topic.name} </h4>
-    <button ${note.id}>edit </button>
+    <button data-id =${note.id}>edit </button>
     </div>
     <br> <br>`;
     
