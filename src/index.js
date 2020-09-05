@@ -29,8 +29,8 @@ function getNotes() {
             // </div>
             // <br> <br>`;
             
-            // document.querySelector('#notes-container').innerHTML += notesInfo;
-            render(note) // *** Im running into a problem Here! Unless i refresh the page the Post appears to not work. Also, the POST returns an object that doesn't recognize the name of the topic until refreshed???
+             document.querySelector('#notes-container').innerHTML += newNote.render();
+           // render(note) // *** Im running into a problem Here! Unless i refresh the page the Post appears to not work. Also, the POST returns an object that doesn't recognize the name of the topic until refreshed???
         });
     })
 
@@ -38,20 +38,20 @@ function getNotes() {
 
 
 
-function render(note){
-    const notesInfo = `<div data-id="${note.id}">            
-    <h2>${note.attributes.title} </h2>
-    <h3>${note.attributes.speaker} </h3>
-    <p>  ${note.attributes.description}</p>
-    <a href="${note.attributes.link_url}"> Link to sermon/message </a>
-    <h4> ${note.attributes.topic.name} </h4>
-    <button data-id =${note.id}>edit </button>
-    </div>
-    <br> <br>`;
+// function render(note){
+//     const notesInfo = `<div data-id="${note.id}">            
+//     <h2>${note.attributes.title} </h2>
+//     <h3>${note.attributes.speaker} </h3>
+//     <p>  ${note.attributes.description}</p>
+//     <a href="${note.attributes.link_url}"> Link to sermon/message </a>
+//     <h4> ${note.attributes.topic.name} </h4>
+//     <button data-id =${note.id}>edit </button>
+//     </div>
+//     <br> <br>`;
     
-    document.querySelector('#notes-container').innerHTML += notesInfo;
+//     document.querySelector('#notes-container').innerHTML += notesInfo;
 
-}
+// }
 
 
 
@@ -76,17 +76,23 @@ function formHandler(e) {
 
 
 function postFetchReq(title,description,speaker,link_url,topic_id) {
+    console.log(title,description,speaker,link_url,topic_id);
 const bodyData ={title,description,speaker,link_url,topic_id}
+
 fetch(notesurl, {
-method: 'POST',
+
+method: "POST",
 headers:{"Content-Type": "application/json"},
 body: JSON.stringify(bodyData)
-
+ 
 })
+
 .then(response => response.json())
 .then(note => {
     console.log(note)
-    // const newNote = //`<div id="${note.id}">            
+     const newNote = new Note(note.data)
+     
+     //`<div id="${note.id}">            
     //  <h2>${note.title} </h2>
     //  <h3>${note.speaker} </h3>
     //  <p>  ${note.description}</p>
@@ -95,8 +101,9 @@ body: JSON.stringify(bodyData)
     //  <button ${note.id}>edit </button>
     //  </div>
     //  <br> <br>`;
-    //  document.querySelector('#notes-container').innerHTML += newNote;
-    render(note)
+     //debugger
+      document.querySelector('#notes-container').innerHTML += newNote.render();
+    //render(note)
 })
 
 }
