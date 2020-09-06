@@ -6,6 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const notesForm = document.querySelector('#create-note-form')
     notesForm.addEventListener('submit',(e) => formHandler(e))
+
+    const notesContainer = document.querySelector("#notes-container");
+    notesContainer.addEventListener('click',(e) => {
+    const editId = e.target.dataset.id
+    const note = Note.findById(editId);
+    console.log(note);
+
+    } )
 })
 
 
@@ -19,43 +27,14 @@ function getNotes() {
         notes.data.forEach(note => {
             //debugger
             let newNote = new Note(note)
-            // const notesInfo = `<div id="${note.id}">            
-            // <h2>${note.attributes.title} </h2>
-            // <h3>${note.attributes.speaker} </h3>
-            // <p>  ${note.attributes.description}</p>
-            // <a href="${note.attributes.link_url}"> Link to sermon/message </a>
-            // <h4> ${note.attributes.topic.name} </h4>
-            // <button ${note.id}>edit </button>
-            // </div>
-            // <br> <br>`;
+            
             
              document.querySelector('#notes-container').innerHTML += newNote.render();
-           // render(note) // *** Im running into a problem Here! Unless i refresh the page the Post appears to not work. Also, the POST returns an object that doesn't recognize the name of the topic until refreshed???
+           
         });
     })
 
 }
-
-
-
-// function render(note){
-//     const notesInfo = `<div data-id="${note.id}">            
-//     <h2>${note.attributes.title} </h2>
-//     <h3>${note.attributes.speaker} </h3>
-//     <p>  ${note.attributes.description}</p>
-//     <a href="${note.attributes.link_url}"> Link to sermon/message </a>
-//     <h4> ${note.attributes.topic.name} </h4>
-//     <button data-id =${note.id}>edit </button>
-//     </div>
-//     <br> <br>`;
-    
-//     document.querySelector('#notes-container').innerHTML += notesInfo;
-
-// }
-
-
-
-
 
 
 
@@ -92,18 +71,9 @@ body: JSON.stringify(bodyData)
     console.log(note)
      const newNote = new Note(note.data)
      
-     //`<div id="${note.id}">            
-    //  <h2>${note.title} </h2>
-    //  <h3>${note.speaker} </h3>
-    //  <p>  ${note.description}</p>
-    //  <a href="${note.link_url}"> Link to sermon/message </a>
-    //  <h4> ${note.topic_id.name} </h4>
-    //  <button ${note.id}>edit </button>
-    //  </div>
-    //  <br> <br>`;
      //debugger
       document.querySelector('#notes-container').innerHTML += newNote.render();
-    //render(note)
+    
 })
 
 }
